@@ -1,0 +1,39 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/daily_health_reminder_prod}
+      auto-index-creation: false
+
+# JWT Configuration
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:3600000} # 1 hour in milliseconds
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:2592000000} # 30 days in milliseconds
+
+# Server Configuration
+server:
+  port: ${PORT:8080}
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+  http2:
+    enabled: true
+
+# Logging
+logging:
+  level:
+    root: WARN
+    com.dailyhealthreminder: INFO
+    org.springframework.data.mongodb: WARN
+    org.springframework.security: WARN
+  file:
+    name: logs/daily-health-reminder-prod.log
+    max-size: 10MB
+    max-history: 30
+
+# CORS Configuration
+cors:
+  allowed-origins: ${ALLOWED_ORIGINS:https://yourdomain.com}
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS,PATCH
+  allowed-headers: "*"
+  allow-credentials: true
